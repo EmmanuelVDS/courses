@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -14,25 +15,38 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @NotBlank
-    @Size(min = 2)
+    @NotNull(message = "Veuillez indiquer un nom")
+    @NotBlank(message = "Veuillez indiquer un nom")
+    @Size(min = 2, max = 50, message = "Veuillez indiquer un Nom entre 2 et 50 caractères")
     private String name;
 
-    @Email
-    @NotNull
-    @NotBlank
+    @Email(message = "Le format de votre adresse email n'est pas bon")
+    @NotNull(message = "Veuillez indiquer une adresse email")
+    @NotBlank(message = "Veuillez indiquer une adresse email")
+    @Column(unique = true)
     private String email;
 
-    @NotNull
-    @NotBlank
-    @Size(min = 8)
+    @NotNull(message = "Veuillez indiquer un mot de passe")
+    @NotBlank(message = "Veuillez indiquer un mot de passe")
+    @Size(min = 8, message = "Veuillez indiquer un mot de passe avec au moins 8 caractères")
     private String password;
 
     @ManyToMany
     private List<ListItem> listItems;
 
+    @ManyToMany
+    private Set<Role> roles;
+
+    private boolean active;
+
     public User() {
+    }
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.active = true;
     }
 
     public Long getId() {
@@ -73,6 +87,22 @@ public class User {
 
     public void setListItems(List<ListItem> listItems) {
         this.listItems = listItems;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override

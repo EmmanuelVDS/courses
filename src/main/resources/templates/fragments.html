@@ -1,0 +1,47 @@
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Liste de courses partagée</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="/css/style.css"  media="screen,projection"/>
+</head>
+
+<div th:fragment="scripts">
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script type="text/javascript" src="/js/script.js"></script>
+</div>
+
+<header class="header blue-grey" th:fragment="header">
+    <nav class="container">
+        <div class="nav-wrapper blue-grey">
+            <a th:href="@{/}" class="brand-logo">Ma liste de courses à 2</a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <div th:if="${session.isEmpty()}">
+                    <li><a th:href="@{/signup}">Inscription</a></li>
+                    <li><a th:href="@{/login}">Connexion</a></li>
+                </div>
+                <div th:unless="${session.isEmpty()}">
+                    <li><a th:href="@{/app/profile}">Mon profil</a></li>
+                    <li><a th:href="@{/logout}">Déconnexion</a></li>
+                </div>
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        <div th:if="${session.isEmpty()}">
+            <li><a th:href="@{/signup}">Inscription</a></li>
+            <li><a th:href="@{/login}">Connexion</a></li>
+        </div>
+        <div th:unless="${session.isEmpty()}">
+            <li><a th:href="@{/app/profile}">Mon profil</a></li>
+            <li><a th:href="@{/logout}">Déconnexion</a></li>
+        </div>
+    </ul>
+</header>

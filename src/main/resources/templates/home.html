@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="fragments::head"></head>
+<body>
+<header th:replace="fragments::header"></header>
+
+<section class="container">
+    <h1>HOME</h1>
+    <p>Bonjour <span th:text="${session.user.name}"></span></p>
+</section>
+<div th:replace="fragments::scripts"></div>
+</body>
+</html>

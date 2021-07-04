@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="fragments::head"></head>
+<body>
+<header th:replace="fragments::header"></header>
+<section class="container">
+    <h3>Mon profil</h3>
+    <p>Nom : <span th:text="${#strings.capitalize(session.user.name)}"></span></p>
+    <p>Email : <span th:text="${session.user.email}"></span></p>
+</section>
+<div th:replace="fragments::scripts"></div>
+</body>
+</html>

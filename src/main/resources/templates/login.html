@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head th:replace="fragments::head"></head>
+<body>
+<header th:replace="fragments::header"></header>
+
+<section class="container">
+
+  <h3>Connexion</h3>
+
+  <div class="row">
+    <form class="col s6 offset-s3" th:action="@{/login}" method="POST">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix ">email</i>
+          <input id="icon_email" type="email" class="validate " name="EMAIL">
+          <label for="icon_email">E-mail</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">lock</i>
+          <input id="icon_lock" type="password" class="validate" name="PASSWORD">
+          <label for="icon_lock">Mot de passe</label>
+        </div>
+        <button class="btn waves-effect waves-light col s4 offset-s4 blue-grey back-text" type="submit" name="action">Valider
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+<div th:replace="fragments::scripts"></div>
+</body>
+</html>
