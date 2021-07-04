@@ -69,8 +69,7 @@ public class CoursesController {
 
     @GetMapping({ "/signup" })
     public ModelAndView signupGet() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("signup");
+        ModelAndView mav = new ModelAndView("signup");
         mav.addObject("user", new User());
         return mav;
     }
@@ -94,10 +93,8 @@ public class CoursesController {
                 user.setRoles(roles);
                 user.setActive(true);
                 userService.addUser(user);
-                System.out.println("BONJOUR");
                 return new ModelAndView("redirect:/");
             } catch (Exception exception) {
-                System.out.println("coucou");
                 ModelAndView mav = signupGet();
                 mav.addObject("user", user);
                 return mav;
