@@ -12,14 +12,19 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @NotBlank
+    @NotNull(message = "Veuillez indiquer un nom pour la catégorie")
+    @NotBlank(message = "Veuillez indiquer un nom pour la catégorie")
+    @Column(unique = true)
     private String name;
 
     @OneToMany(mappedBy = "category")
     private List<Item> items;
 
     public Category() {
+    }
+
+    public Category(String name) {
+        this.name = name;
     }
 
     public Long getId() {

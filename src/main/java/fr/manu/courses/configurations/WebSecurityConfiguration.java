@@ -12,9 +12,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-    private SpringUserDetailsService springUserDetailsService;
-    private AuthSuccessHandler authSuccessHandler;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final SpringUserDetailsService springUserDetailsService;
+    private final AuthSuccessHandler authSuccessHandler;
 
     public WebSecurityConfiguration(BCryptPasswordEncoder bCryptPasswordEncoder, SpringUserDetailsService springUserDetailsService, AuthSuccessHandler authSuccessHandler) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;

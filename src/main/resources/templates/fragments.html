@@ -1,3 +1,7 @@
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head th:fragment="head">
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -19,14 +23,16 @@
 <header class="header blue-grey" th:fragment="header">
     <nav class="container">
         <div class="nav-wrapper blue-grey">
-            <a th:href="@{/}" class="brand-logo">Ma liste de courses à 2</a>
+            <a th:href="@{/}" class="brand-logo">Ma liste de courses partagée</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <div th:if="${session.isEmpty()}">
+                <div th:if="${session.user == null}">
                     <li><a th:href="@{/signup}">Inscription</a></li>
                     <li><a th:href="@{/login}">Connexion</a></li>
                 </div>
-                <div th:unless="${session.isEmpty()}">
+                <div th:unless="${session.user == null}">
+                    <li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/categories}">Catégories</a></li>
+                    <li><a th:href="@{/app/shopping-list}">Liste de courses</a></li>
                     <li><a th:href="@{/app/profile}">Mon profil</a></li>
                     <li><a th:href="@{/logout}">Déconnexion</a></li>
                 </div>
@@ -35,13 +41,17 @@
     </nav>
 
     <ul class="sidenav" id="mobile-demo">
-        <div th:if="${session.isEmpty()}">
+        <div th:if="${session.user == null}">
             <li><a th:href="@{/signup}">Inscription</a></li>
             <li><a th:href="@{/login}">Connexion</a></li>
         </div>
-        <div th:unless="${session.isEmpty()}">
+        <div th:unless="${session.user == null}">
+            <li sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/categories}">Catégories</a></li>
+            <li><a th:href="@{/app/shopping-list}">Liste de courses</a></li>
             <li><a th:href="@{/app/profile}">Mon profil</a></li>
             <li><a th:href="@{/logout}">Déconnexion</a></li>
         </div>
     </ul>
 </header>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments::head"></head>
+<body>
+<header th:replace="fragments::header"></header>
+<section class="container">
+  <h3>Catégories</h3>
+
+    <p>Page <span th:text="${categoriesPages.number+1}"></span> sur <span th:text="${categoriesPages.totalPages}"></span></p>
+
+  <span th:if="${!categoriesPages.first}">
+      <a th:href="@{categories?page=0}"><i class="material-icons">fast_rewind</i></a>
+      <a th:href="@{'categories?page=' + ${categoriesPages.number-1 }}"><i class="material-icons">skip_previous</i></a>
+  </span>
+  <span th:unless="${!categoriesPages.first}">
+    <span><i class="material-icons">fast_rewind</i></span>
+    <span><i class="material-icons">skip_previous</i></span>
+  </span>
+
+  <span th:if="${!categoriesPages.last}">
+      <a th:href="@{'categories?page=' + ${categoriesPages.number+1 }}"><i class="material-icons">skip_next</i></a>
+      <a th:href="@{'categories?page=' + ${categoriesPages.totalPages-1 }}"><i class="material-icons">fast_forward</i></a>
+  </span>
+  <span th:unless="${!categoriesPages.last}">
+    <span>
+      <i class="material-icons">skip_next</i>
+    </span>
+    <span><i class="material-icons">fast_forward</i></span>
+  </span>
+
+  <div class="input-field col s12 m4">
+    <select>
+      <option value="" disabled selected>Nombre de catégories par page</option>
+      <option value="1">10</option>
+      <option value="2">Tout sur une page</option>
+    </select>
+    <label>Materialize Select</label>
+  </div>
+
+  <table>
+    <tr th:each="category:${categoriesPages}">
+      <td th:text="${category.name}"></td>
+    </tr>
+  </table>
+
+  <div class="row">
+    <form class="col s6 offset-s3" th:action="@{/admin/categories}" th:object="${category}" method="POST" modelAttribute="category">
+      <div class="row">
+
+        <div class="input-field col s12">
+          <i class="material-icons prefix ">control_point</i>
+          <input id="icon_control_point" type="text" th:field="*{name}" class="validate">
+          <span th:if="${#fields.hasErrors('name')}" th:errorclass="erreur" th:errors="*{name}"></span>
+          <label for="icon_control_point">Nom</label>
+        </div>
+
+        <button class="btn waves-effect waves-light col s4 offset-s4 blue-grey back-text" type="submit" name="action">Valider
+          <i class="material-icons right">send</i>
+        </button>
+
+      </div>
+    </form>
+  </div>
+
+
+</section>
+<div th:replace="fragments::scripts"></div>
+</body>
+</html>
